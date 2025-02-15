@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
 import UseTransition from "./components/react19-concepts/UseTransition";
+import UseContextHook from "./components/hooks/useContext";
 
 const App: React.FC = () => {
   return (
@@ -15,6 +16,7 @@ const App: React.FC = () => {
           path="/learn-react-19/useTransition"
           element={<UseTransition />}
         />
+        <Route path="/react/hooks/useContext" element={<UseContextHook />} />
       </Routes>
     </Router>
   );
