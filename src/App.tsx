@@ -13,10 +13,7 @@ const App: React.FC = () => {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/learn-react-19" element={<About />} />
-        <Route
-          path="/learn-react-19/useTransition"
-          element={<UseTransition />}
-        />
+        <Route path="/hooks/useTransition" element={<UseTransition />} />
         <Route path="/hooks/useContext" element={<UseContextHook />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
