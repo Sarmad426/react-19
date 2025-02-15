@@ -1,80 +1,134 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useState, ReactNode } from "react";
 
-// If we are using it in a separate module then we need to export the MyContext component
-const MyContext = createContext<{
-  message: string;
-  setMessage: React.Dispatch<React.SetStateAction<string>>;
-}>({
-  message: "",
-  setMessage: () => {},
+// Define types for our contexts
+type ThemeContextType = {
+  isDark: boolean;
+  toggleTheme: () => void;
+};
+
+type UserType = {
+  name: string;
+  role: string;
+};
+
+type UserContextType = {
+  user: UserType;
+  login: () => void;
+  logout: () => void;
+};
+
+// Create contexts with default values
+const ThemeContext = createContext<ThemeContextType>({
+  isDark: false,
+  toggleTheme: () => {},
 });
 
-const UseContextHook: React.FC = () => {
-  const [message, setMessage] = useState("Hello from Parent!");
+const UserContext = createContext<UserContextType>({
+  user: { name: "", role: "" },
+  login: () => {},
+  logout: () => {},
+});
+
+// Provider component that wraps our app
+const AppProviders: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [isDark, setIsDark] = useState(false);
+  const [user, setUser] = useState<UserType>({ name: "", role: "" });
+
+  const toggleTheme = () => setIsDark((prev) => !prev);
+  const login = () => setUser({ name: "John Doe", role: "Admin" });
+  const logout = () => setUser({ name: "", role: "" });
 
   return (
-    <MyContext.Provider value={{ message, setMessage }}>
-      <p className="text-start text-lg text-gray-700 w-4/6 mx-auto my-5">
-        The useContext hook in React lets you access context values directly in
-        a functional component. It is a way of data sharing between components
-        It makes it easier to use context without wrapping components in a
-        Consumer. This is helpful for sharing data like themes, user info, or
-        settings across the component tree without passing props manually. It
-        avoids prop drilling (manually passing props through multiple levels of
-        components).
-      </p>
-      <div className="max-w-4xl mx-auto p-8 bg-white rounded-xl shadow-lg">
-        <h1 className="text-4xl font-bold text-gray-800 mb-8 text-center">
-          Context Example
-        </h1>
-        <div className="mb-8">
-          <label
-            htmlFor="message"
-            className="text-lg font-medium text-gray-700"
-          >
-            Message:
-          </label>
-          <input
-            type="text"
-            id="message"
-            value={message}
-            onChange={(e) => setMessage(e.target.value)}
-            className="text-black mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-          />
-        </div>
-        <Child1 />
-      </div>
-    </MyContext.Provider>
+    <ThemeContext.Provider value={{ isDark, toggleTheme }}>
+      <UserContext.Provider value={{ user, login, logout }}>
+        {children}
+      </UserContext.Provider>
+    </ThemeContext.Provider>
   );
 };
 
-const Child1: React.FC = () => {
+// Example components using context
+const Header: React.FC = () => {
+  const { isDark } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
+
   return (
-    <div className="bg-blue-50 p-6 rounded-xl shadow-sm mb-6">
-      <h2 className="text-2xl font-bold text-blue-900 mb-6">Child 1</h2>
-      <Child2 />
-    </div>
+    <header
+      className={`p-4 ${
+        isDark ? "bg-gray-800 text-white" : "bg-white text-gray-800"
+      }`}
+    >
+      <h2 className="text-xl font-bold">My App</h2>
+      {user.name ? <p>Welcome, {user.name}</p> : <p>Please log in</p>}
+    </header>
   );
 };
 
-const Child2: React.FC = () => {
-  // If we were in a separate component we need to import the MyContext
-  const { message, setMessage } = useContext(MyContext);
+const Controls: React.FC = () => {
+  const { isDark, toggleTheme } = useContext(ThemeContext);
+  const { user, login, logout } = useContext(UserContext);
 
   return (
-    <div className="bg-blue-200 p-6 rounded-xl shadow-sm">
-      <h2 className="text-2xl font-bold text-blue-900 mb-6">Child 2</h2>
-      <p className="text-xl text-blue-800 mb-6">
-        Message from Parent: <span className="font-semibold">{message}</span>
-      </p>
+    <div className="p-4 mt-4">
       <button
-        onClick={() => setMessage("Message from Child 3")}
-        className="px-6 py-3 rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+        onClick={toggleTheme}
+        className="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 mr-2"
       >
-        Change Message
+        Switch to {isDark ? "Light" : "Dark"} Theme
       </button>
+
+      {user.name ? (
+        <button
+          onClick={logout}
+          className="px-4 py-2 bg-red-500 text-white rounded-md hover:bg-red-600"
+        >
+          Logout
+        </button>
+      ) : (
+        <button
+          onClick={login}
+          className="px-4 py-2 bg-green-500 text-white rounded-md hover:bg-green-600"
+        >
+          Login
+        </button>
+      )}
     </div>
   );
 };
 
-export default UseContextHook;
+// Main component that demonstrates useContext
+const UseContextExample: React.FC = () => {
+  return (
+    <div className="max-w-2xl mx-auto p-6">
+      <h1 className="text-3xl font-bold text-center mb-4">
+        useContext Hook Example
+      </h1>
+
+      <p className="text-center text-lg text-gray-700 mx-auto my-5">
+        The useContext hook in React lets you access context values directly in
+        functional components. It helps share data like themes, user
+        information, or application settings across your component tree without
+        complex nesting. This creates a centralized store of data that any
+        component can access easily.
+      </p>
+
+      <AppProviders>
+        <div className="border border-gray-300 rounded-lg overflow-hidden">
+          <Header />
+          <Controls />
+
+          <div className="p-4 bg-blue-50 m-4 rounded-md">
+            <h3 className="font-medium text-blue-800 mb-2">How It Works</h3>
+            <p className="text-blue-700">
+              Both the Header and Controls components use the same context
+              values. Try toggling the theme or logging in to see how they stay
+              in sync!
+            </p>
+          </div>
+        </div>
+      </AppProviders>
+    </div>
+  );
+};
+
+export default UseContextExample;
