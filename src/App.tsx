@@ -5,6 +5,7 @@ import Home from "./components/Home";
 import About from "./components/About";
 import UseTransition from "./components/react19-concepts/UseTransition";
 import UseContextHook from "./components/hooks/useContext";
+import NotFound from "./components/404/NotFound";
 
 const App: React.FC = () => {
   return (
@@ -16,7 +17,8 @@ const App: React.FC = () => {
           path="/learn-react-19/useTransition"
           element={<UseTransition />}
         />
-        <Route path="/react/hooks/useContext" element={<UseContextHook />} />
+        <Route path="/hooks/useContext" element={<UseContextHook />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );
