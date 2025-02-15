@@ -1,3 +1,13 @@
+/*
+  The useContext hook in React lets you access context
+  values directly in a functional component. It is a way of
+  data sharing between components It makes it easier to use 
+  context without wrapping components in a Consumer. This is 
+  helpful for sharing data like themes, user info, or settings
+  across the component tree without passing props manually. It avoids
+  prop drilling (manually passing props through multiple levels of components).
+*/
+
 import React, { createContext, useContext, useState } from "react";
 
 // If we are using it in a separate module then we need to export the MyContext component
@@ -30,7 +40,7 @@ const UseContextHook: React.FC = () => {
             id="message"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
-            className="mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+            className="text-black mt-2 w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
           />
         </div>
         <Child1 />
