@@ -1,46 +1,21 @@
-import { useState, useTransition } from "react";
+import { Link } from "react-router-dom";
 
-export default function UpdateName() {
-  const [name, setName] = useState("");
-  const [error, setError] = useState<string | null>(null);
-  const [isPending, startTransition] = useTransition();
-  const [userName, setUserName] = useState("");
-
-  const updateName = (newName: string): string | null => {
-    if (!newName.trim()) return "Name cannot be empty.";
-    return null;
-  };
-
-  const handleSubmit = () => {
-    const validationError = updateName(name);
-    if (validationError) {
-      setError(validationError);
-      return;
-    }
-
-    setError(null);
-    startTransition(() => {
-      setUserName("Updating...");
-      setTimeout(() => {
-        setUserName(name);
-      }, 1000);
-    });
-  };
-
+export default function Home() {
+  const linkStyles =
+    "flex items-center justify-center bg-black text-white px-4 py-2 rounded-md h-[45px] w-[150px]";
   return (
-    <div className="flex flex-col items-center gap-12">
-      <h2 className="text-3xl my-5 py-4">{userName || "Enter a name"}</h2>
-      <div>
-        <input
-          value={name}
-          onChange={(event) => setName(event.target.value)}
-          placeholder="Type your name"
-          className="border p-3 h-[40px] w-[20rem] rounded-md mx-3"
-        />
-        <button onClick={handleSubmit} disabled={isPending} className="ml-2">
-          {isPending ? "Updating..." : "Update"}
-        </button>
-        {error && <p className="text-red-500 my-2">{error}</p>}
+    <div className="flex flex-col items-center justify-center min-h-screen">
+      <h3 className="text-3xl md:text-4xl font-semibold mb-5">Hooks</h3>
+      <div className="flex gap-6 flex-wrap">
+        <Link to="/hooks/useContext" className={linkStyles}>
+          useContext
+        </Link>
+        <Link to="/hooks/useTransition" className={linkStyles}>
+          useTransition
+        </Link>
+        <Link to="/hooks/useRef" className={linkStyles}>
+          useRef
+        </Link>
       </div>
     </div>
   );
