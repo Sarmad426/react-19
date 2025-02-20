@@ -35,7 +35,7 @@ const AppProviders: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<UserType>({ name: "", role: "" });
 
   const toggleTheme = () => setIsDark((prev) => !prev);
-  const login = () => setUser({ name: "John Doe", role: "Admin" });
+  const login = () => setUser({ name: "Sarmad", role: "Admin" });
   const logout = () => setUser({ name: "", role: "" });
 
   return (
