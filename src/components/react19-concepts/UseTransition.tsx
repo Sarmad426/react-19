@@ -3,15 +3,15 @@ import { useState, useTransition } from "react";
 import { productData } from "../../data/product-data";
 
 const HomeComponent = () => {
-  return <h2>Home</h2>;
+  return <button className="btn">Home</button>;
 };
 const AboutComponent = () => {
-  return <h2>About</h2>;
+  return <button className="btn">About</button>;
 };
 const ProductsComponent = () => {
   return (
     <div>
-      <h2>Products</h2>
+      <button className="btn">Products</button>
       <div className="products">
         {productData.map((product, index) => (
           <div key={index} className="product">
