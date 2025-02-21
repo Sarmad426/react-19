@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
 import About from "./components/About";
-import UseTransition from "./components/react19-concepts/UseTransition";
+import UseTransition from "./components/react19-concepts/UseTransitionTabs";
 import UseContextExample from "./components/hooks/useContext";
 import NotFound from "./components/404/NotFound";
 import Navbar from "./components/navbar";
