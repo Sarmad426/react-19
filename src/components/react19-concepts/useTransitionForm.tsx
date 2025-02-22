@@ -1,6 +1,6 @@
 import { useState, useTransition } from "react";
 
-export default function Home() {
+export function UseTransitionForm() {
   const [name, setName] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [isPending, startTransition] = useTransition();
