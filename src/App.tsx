@@ -2,12 +2,13 @@ import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./components/Home";
-import About from "./components/About";
-import UseTransition from "./components/react19-concepts/UseTransitionTabs";
+import { UseTransitionTabs } from "./components/react19-concepts/UseTransitionTabs";
 import UseContextExample from "./components/hooks/useContext";
 import NotFound from "./components/404/NotFound";
 import Navbar from "./components/navbar";
 import UseRefExample from "./components/hooks/useRef";
+import { UseTransitionLinks } from "./components/react19-concepts/useTransitionLinks";
+import { UseTransitionForm } from "./components/react19-concepts/useTransitionForm";
 
 const App: React.FC = () => {
   return (
@@ -16,8 +17,15 @@ const App: React.FC = () => {
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/learn-react-19" element={<About />} />
-          <Route path="/hooks/useTransition" element={<UseTransition />} />
+          <Route path="/hooks/useTransition" element={<UseTransitionLinks />} />
+          <Route
+            path="/hooks/useTransition/tabs"
+            element={<UseTransitionTabs />}
+          />
+          <Route
+            path="/hooks/useTransition/form"
+            element={<UseTransitionForm />}
+          />
           <Route path="/hooks/useContext" element={<UseContextExample />} />
           <Route path="/hooks/useRef" element={<UseRefExample />} />
           <Route path="*" element={<NotFound />} />
