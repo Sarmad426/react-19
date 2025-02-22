@@ -23,7 +23,7 @@ const ProductsComponent = () => {
   );
 };
 
-const App: React.FC = () => {
+export const UseTransitionTabs: React.FC = () => {
   const [tab, setTab] = useState<string>("home");
   const [isPending, startTransition] = useTransition();
 
@@ -55,5 +55,3 @@ const App: React.FC = () => {
     </div>
   );
 };
-
-export default App;
