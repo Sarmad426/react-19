@@ -73,8 +73,12 @@ export const UseTransitionTabs: React.FC = () => {
             key={id}
             onClick={() => handleTabChange(id)}
             className={`
-              link-styles 
-              ${activeTab === id ? "bg-blue-500 text-white" : ""}
+              btn-styles
+              ${
+                activeTab === id
+                  ? "bg-black text-white"
+                  : "bg-transparent outline text-black"
+              }
               disabled:bg-gray-600 
               disabled:cursor-not-allowed
             `}
