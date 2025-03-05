@@ -25,7 +25,18 @@ export function UseTransitionTabs() {
   ];
 
   return (
-    <div className="p-4">
+    <div className="p-4 flex items-center justify-center flex-col">
+      <p className="text-gray-700 my-12">
+        <span className="bg-gray-100 p-2 rounded-md">useTransition</span> is a
+        React Hook that lets you render a part of the UI in the background.{" "}
+        <Link
+          to="https://react.dev/reference/react/useTransition"
+          target="_blank"
+          className="text-indigo-500 underline"
+        >
+          View docs
+        </Link>
+      </p>
       <div className="flex gap-4 mb-4">
         {tabButtons.map(({ name, label }) => (
           <TabButton
@@ -79,7 +90,7 @@ const PostsTab = memo(function PostsTab() {
   console.log("[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />");
   return (
     <ul className="list-disc pl-6">
-      {Array.from({ length: 400 }, (_, i) => (
+      {Array.from({ length: 500 }, (_, i) => (
         <SlowPost key={i} index={i} />
       ))}
     </ul>
