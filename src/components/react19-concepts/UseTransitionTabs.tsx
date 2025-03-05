@@ -1,96 +1,102 @@
-import { useState, useTransition, useCallback, useEffect } from "react";
-import { productData } from "../../data/product-data";
+import { useState, useTransition, memo } from "react";
+import { Link } from "react-router-dom";
 
-type TabId = "home" | "about" | "products";
+type TabType = "about" | "posts" | "contact";
 
-const tabs: { id: TabId; label: string }[] = [
-  { id: "home", label: "Home" },
-  { id: "about", label: "About" },
-  { id: "products", label: "Products" },
-];
+type TabButtonProps = {
+  action: () => void;
+  children: React.ReactNode;
+  isActive: boolean;
+};
 
-const HomeComponent = () => <p className="text-xl">🏠 Welcome to Home</p>;
+type SlowPostProps = {
+  index: number;
+};
 
-const AboutComponent = () => <p className="text-xl">ℹ️ About Us</p>;
-
-const ProductsComponent = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [, startTransition] = useTransition();
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      startTransition(() => {
-        setIsLoading(false);
-      });
-    }, 1000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return <p className="text-yellow-400 text-lg">⏳ Loading Products...</p>;
-  }
-
+export function UseTransitionTabs() {
+  const [tab, setTab] = useState<TabType>("about");
   return (
-    <div>
-      <p className="text-xl mb-4">🛒 Our Products</p>
-      <div className="flex gap-6 flex-wrap my-8">
-        {productData.map((product, index) => (
-          <div key={index} className="p-3 rounded-lg shadow-md w-[180px]">
-            {product}
-          </div>
-        ))}
+    <div className="p-4">
+      <nav className="flex gap-4 mb-4">
+        <TabButton isActive={tab === "about"} action={() => setTab("about")}>
+          About
+        </TabButton>
+        <TabButton isActive={tab === "posts"} action={() => setTab("posts")}>
+          Posts (slow)
+        </TabButton>
+        <TabButton
+          isActive={tab === "contact"}
+          action={() => setTab("contact")}
+        >
+          Contact
+        </TabButton>
+      </nav>
+      <hr className="my-4 border-gray-300" />
+      <div>
+        {tab === "about" && <AboutTab />}
+        {tab === "posts" && <PostsTab />}
+        {tab === "contact" && <ContactTab />}
       </div>
     </div>
   );
-};
+}
 
-export const UseTransitionTabs: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<TabId>("home");
-  const [, startTransition] = useTransition();
-
-  const handleTabChange = useCallback((newTab: TabId) => {
-    startTransition(() => {
-      setActiveTab(newTab);
-    });
-  }, []);
-
-  const renderTabContent = useCallback(() => {
-    const tabComponents: Record<TabId, React.ReactElement> = {
-      home: <HomeComponent />,
-      about: <AboutComponent />,
-      products: <ProductsComponent />,
-    };
-
-    return tabComponents[activeTab];
-  }, [activeTab]);
+const TabButton: React.FC<TabButtonProps> = ({
+  action,
+  children,
+  isActive,
+}) => {
+  const [isPending, startTransition] = useTransition();
 
   return (
-    <div className="p-6 min-h-screen flex flex-col items-center space-y-6">
-      <div className="flex space-x-4">
-        {tabs.map(({ id, label }) => (
-          <button
-            key={id}
-            onClick={() => handleTabChange(id)}
-            className={`
-              btn-styles
-              ${
-                activeTab === id
-                  ? "bg-black text-white"
-                  : "bg-transparent outline text-black"
-              }
-              disabled:bg-gray-600 
-              disabled:cursor-not-allowed
-            `}
-          >
-            {label}
-          </button>
-        ))}
-      </div>
-
-      <div className="text-center w-full">{renderTabContent()}</div>
-    </div>
+    <button
+      onClick={() => startTransition(action)}
+      className={`px-4 py-2 rounded-md transition-colors border ${
+        isActive
+          ? "bg-gray-800 text-white"
+          : isPending
+          ? "bg-gray-500 text-white"
+          : "bg-white text-black"
+      }`}
+    >
+      {children}
+    </button>
   );
 };
 
-export default UseTransitionTabs;
+function AboutTab() {
+  return <p className="text-gray-700">Welcome to my profile!</p>;
+}
+
+const PostsTab = memo(function PostsTab() {
+  console.log("[ARTIFICIALLY SLOW] Rendering 500 <SlowPost />");
+  return (
+    <ul className="list-disc pl-6">
+      {Array.from({ length: 400 }, (_, i) => (
+        <SlowPost key={i} index={i} />
+      ))}
+    </ul>
+  );
+});
+
+const SlowPost: React.FC<SlowPostProps> = ({ index }) => {
+  let startTime = performance.now();
+  while (performance.now() - startTime < 1) {}
+  return <li className="text-gray-700">Post #{index + 1}</li>;
+};
+
+function ContactTab() {
+  return (
+    <div className="text-gray-700">
+      <p>You can find me online here:</p>
+      <div className="pl-6">
+        <Link
+          to="mailto:sarmadrafique040@gmail.com"
+          className="text-indigo-500 underline"
+        >
+          sarmadrafique040@gmail.com
+        </Link>
+      </div>
+    </div>
+  );
+}
