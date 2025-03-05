@@ -1,21 +1,34 @@
-import { useState, useEffect, useTransition } from "react";
+import { useState, useTransition, useCallback, useEffect } from "react";
 import { productData } from "../../data/product-data";
 
+type TabId = "home" | "about" | "products";
+
+const tabs: { id: TabId; label: string }[] = [
+  { id: "home", label: "Home" },
+  { id: "about", label: "About" },
+  { id: "products", label: "Products" },
+];
+
 const HomeComponent = () => <p className="text-xl">🏠 Welcome to Home</p>;
+
 const AboutComponent = () => <p className="text-xl">ℹ️ About Us</p>;
 
 const ProductsComponent = () => {
-  const [isVisible, setIsVisible] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [, startTransition] = useTransition();
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsVisible(true);
-    }, 2000);
+      startTransition(() => {
+        setIsLoading(false);
+      });
+    }, 1000);
+
     return () => clearTimeout(timer);
   }, []);
 
-  if (!isVisible) {
-    return null;
+  if (isLoading) {
+    return <p className="text-yellow-400 text-lg">⏳ Loading Products...</p>;
   }
 
   return (
@@ -33,52 +46,47 @@ const ProductsComponent = () => {
 };
 
 export const UseTransitionTabs: React.FC = () => {
-  const [tab, setTab] = useState<string>("home");
-  const [isPending, startTransition] = useTransition();
+  const [activeTab, setActiveTab] = useState<TabId>("home");
+  const [, startTransition] = useTransition();
 
-  const handleTabChange = (newTab: string) => {
+  const handleTabChange = useCallback((newTab: TabId) => {
     startTransition(() => {
-      setTab(newTab);
+      setActiveTab(newTab);
     });
-  };
+  }, []);
 
-  const renderTabContent = () => {
-    switch (tab) {
-      case "home":
-        return <HomeComponent />;
-      case "about":
-        return <AboutComponent />;
-      case "products":
-        return <ProductsComponent />;
-      default:
-        return null;
-    }
-  };
+  const renderTabContent = useCallback(() => {
+    const tabComponents: Record<TabId, React.ReactElement> = {
+      home: <HomeComponent />,
+      about: <AboutComponent />,
+      products: <ProductsComponent />,
+    };
+
+    return tabComponents[activeTab];
+  }, [activeTab]);
 
   return (
     <div className="p-6 min-h-screen flex flex-col items-center space-y-6">
       <div className="flex space-x-4">
-        {[
-          { id: "home", label: "Home" },
-          { id: "about", label: "About" },
-          { id: "products", label: "Products" },
-        ].map(({ id, label }) => (
+        {tabs.map(({ id, label }) => (
           <button
+            key={id}
             onClick={() => handleTabChange(id)}
-            className={`link-styles disabled:bg-gray-600 disabled:cursor-not-allowed`}
+            className={`
+              link-styles 
+              ${activeTab === id ? "bg-blue-500 text-white" : ""}
+              disabled:bg-gray-600 
+              disabled:cursor-not-allowed
+            `}
           >
             {label}
           </button>
         ))}
       </div>
 
-      <div className="text-center w-full">
-        {isPending ? (
-          <p className="text-yellow-400 text-lg">⏳ Loading...</p>
-        ) : (
-          renderTabContent()
-        )}
-      </div>
+      <div className="text-center w-full">{renderTabContent()}</div>
     </div>
   );
 };
+
+export default UseTransitionTabs;
