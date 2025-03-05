@@ -1,21 +1,6 @@
 import { useState, useEffect, useTransition } from "react";
 import { productData } from "../../data/product-data";
 
-const Button = ({
-  onClick,
-  children,
-}: {
-  onClick: () => void;
-  children: string;
-}) => (
-  <button
-    onClick={onClick}
-    className={`link-styles disabled:bg-gray-600 disabled:cursor-not-allowed`}
-  >
-    {children}
-  </button>
-);
-
 const HomeComponent = () => <p className="text-xl">🏠 Welcome to Home</p>;
 const AboutComponent = () => <p className="text-xl">ℹ️ About Us</p>;
 
@@ -57,19 +42,42 @@ export const UseTransitionTabs: React.FC = () => {
     });
   };
 
+  const renderTabContent = () => {
+    switch (tab) {
+      case "home":
+        return <HomeComponent />;
+      case "about":
+        return <AboutComponent />;
+      case "products":
+        return <ProductsComponent />;
+      default:
+        return null;
+    }
+  };
+
   return (
     <div className="p-6 min-h-screen flex flex-col items-center space-y-6">
       <div className="flex space-x-4">
-        <Button onClick={() => handleTabChange("home")}>Home</Button>
-        <Button onClick={() => handleTabChange("about")}>About</Button>
-        <Button onClick={() => handleTabChange("products")}>Products</Button>
+        {[
+          { id: "home", label: "Home" },
+          { id: "about", label: "About" },
+          { id: "products", label: "Products" },
+        ].map(({ id, label }) => (
+          <button
+            onClick={() => handleTabChange(id)}
+            className={`link-styles disabled:bg-gray-600 disabled:cursor-not-allowed`}
+          >
+            {label}
+          </button>
+        ))}
       </div>
 
       <div className="text-center w-full">
-        {isPending && <p className="text-yellow-400 text-lg">⏳ Loading...</p>}
-        {!isPending && tab === "home" && <HomeComponent />}
-        {!isPending && tab === "about" && <AboutComponent />}
-        {!isPending && tab === "products" && <ProductsComponent />}
+        {isPending ? (
+          <p className="text-yellow-400 text-lg">⏳ Loading...</p>
+        ) : (
+          renderTabContent()
+        )}
       </div>
     </div>
   );
