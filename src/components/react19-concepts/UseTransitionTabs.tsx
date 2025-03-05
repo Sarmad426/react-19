@@ -15,27 +15,37 @@ type SlowPostProps = {
 
 export function UseTransitionTabs() {
   const [tab, setTab] = useState<TabType>("about");
+
+  const [isPending, startTransition] = useTransition();
+
   return (
     <div className="p-4">
       <nav className="flex gap-4 mb-4">
-        <TabButton isActive={tab === "about"} action={() => setTab("about")}>
+        <TabButton
+          isActive={tab === "about"}
+          action={() => startTransition(() => setTab("about"))}
+        >
           About
         </TabButton>
-        <TabButton isActive={tab === "posts"} action={() => setTab("posts")}>
+        <TabButton
+          isActive={tab === "posts"}
+          action={() => startTransition(() => setTab("posts"))}
+        >
           Posts (slow)
         </TabButton>
         <TabButton
           isActive={tab === "contact"}
-          action={() => setTab("contact")}
+          action={() => startTransition(() => setTab("contact"))}
         >
           Contact
         </TabButton>
       </nav>
       <hr className="my-4 border-gray-300" />
       <div>
-        {tab === "about" && <AboutTab />}
-        {tab === "posts" && <PostsTab />}
-        {tab === "contact" && <ContactTab />}
+        {isPending && <p className="text-gray-700">Loading...</p>}
+        {!isPending && tab === "about" && <AboutTab />}
+        {!isPending && tab === "posts" && <PostsTab />}
+        {!isPending && tab === "contact" && <ContactTab />}
       </div>
     </div>
   );
