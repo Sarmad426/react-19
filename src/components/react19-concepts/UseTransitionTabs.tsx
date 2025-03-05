@@ -63,18 +63,9 @@ export const UseTransitionTabs: React.FC = () => {
   return (
     <div className="p-6 min-h-screen flex flex-col items-center space-y-6">
       <div className="flex space-x-4">
-        <Button onClick={() => handleTabChange("home")} disabled={isPending}>
-          Home
-        </Button>
-        <Button onClick={() => handleTabChange("about")} disabled={isPending}>
-          About
-        </Button>
-        <Button
-          onClick={() => handleTabChange("products")}
-          disabled={isPending}
-        >
-          Products
-        </Button>
+        <Button onClick={() => handleTabChange("home")}>Home</Button>
+        <Button onClick={() => handleTabChange("about")}>About</Button>
+        <Button onClick={() => handleTabChange("products")}>Products</Button>
       </div>
 
       <div className="text-center w-full">
