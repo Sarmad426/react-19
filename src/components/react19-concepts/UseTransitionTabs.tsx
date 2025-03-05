@@ -1,4 +1,4 @@
-import { useState, useTransition } from "react";
+import { useState, useEffect, useTransition } from "react";
 import { productData } from "../../data/product-data";
 
 const Button = ({
@@ -22,35 +22,42 @@ const Button = ({
 const HomeComponent = () => <p className="text-xl">🏠 Welcome to Home</p>;
 const AboutComponent = () => <p className="text-xl">ℹ️ About Us</p>;
 
-const ProductsComponent = () => (
-  <div>
-    <p className="text-xl mb-4">🛒 Our Products</p>
-    <div className="flex gap-6 flex-wrap my-8">
-      {productData.map((product, index) => (
-        <div key={index} className="p-3 rounded-lg shadow-md w-[180px]">
-          {product}
-        </div>
-      ))}
+const ProductsComponent = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!isVisible) {
+    return null;
+  }
+
+  return (
+    <div>
+      <p className="text-xl mb-4">🛒 Our Products</p>
+      <div className="flex gap-6 flex-wrap my-8">
+        {productData.map((product, index) => (
+          <div key={index} className="p-3 rounded-lg shadow-md w-[180px]">
+            {product}
+          </div>
+        ))}
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export const UseTransitionTabs: React.FC = () => {
   const [tab, setTab] = useState<string>("home");
   const [isPending, startTransition] = useTransition();
 
   const handleTabChange = (newTab: string) => {
-    if (newTab === "products") {
-      setTimeout(() => {
-        startTransition(() => {
-          setTab(newTab);
-        });
-      }, 2000);
-    } else {
-      startTransition(() => {
-        setTab(newTab);
-      });
-    }
+    startTransition(() => {
+      setTab(newTab);
+    });
   };
 
   return (
