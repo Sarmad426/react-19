@@ -18,28 +18,25 @@ export function UseTransitionTabs() {
 
   const [isPending, startTransition] = useTransition();
 
+  const tabButtons: { name: TabType; label: string }[] = [
+    { name: "about", label: "About" },
+    { name: "posts", label: "Posts (slow)" },
+    { name: "contact", label: "Contact" },
+  ];
+
   return (
     <div className="p-4">
-      <nav className="flex gap-4 mb-4">
-        <TabButton
-          isActive={tab === "about"}
-          action={() => startTransition(() => setTab("about"))}
-        >
-          About
-        </TabButton>
-        <TabButton
-          isActive={tab === "posts"}
-          action={() => startTransition(() => setTab("posts"))}
-        >
-          Posts (slow)
-        </TabButton>
-        <TabButton
-          isActive={tab === "contact"}
-          action={() => startTransition(() => setTab("contact"))}
-        >
-          Contact
-        </TabButton>
-      </nav>
+      <div className="flex gap-4 mb-4">
+        {tabButtons.map(({ name, label }) => (
+          <TabButton
+            key={name}
+            isActive={tab === name}
+            action={() => startTransition(() => setTab(name))}
+          >
+            {label}
+          </TabButton>
+        ))}
+      </div>
       <hr className="my-4 border-gray-300" />
       <div>
         {isPending && <p className="text-gray-700">Loading...</p>}
