@@ -4,15 +4,12 @@ import { productData } from "../../data/product-data";
 const Button = ({
   onClick,
   children,
-  disabled,
 }: {
   onClick: () => void;
   children: string;
-  disabled?: boolean;
 }) => (
   <button
     onClick={onClick}
-    disabled={disabled}
     className={`link-styles disabled:bg-gray-600 disabled:cursor-not-allowed`}
   >
     {children}
