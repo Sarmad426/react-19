@@ -71,7 +71,7 @@ const TabButton: React.FC<TabButtonProps> = ({
       onClick={() => startTransition(action)}
       className={`px-4 py-2 rounded-md transition-colors border ${
         isActive
-          ? "bg-gray-800 text-white"
+          ? "bg-black text-white"
           : isPending
           ? "bg-gray-500 text-white"
           : "bg-white text-black"
