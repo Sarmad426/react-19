@@ -78,5 +78,5 @@ button:focus-visible {
 
 .link-styles,
 .primary-btn {
-  @apply bg-black text-white px-4 py-2 rounded-md h-[45px] min-w-[100px] enabled:cursor-pointer my-2 hover:bg-[#222] transition-colors duration-100;
+  @apply bg-black text-white px-4 py-2 rounded-md h-[45px] min-w-[100px] enabled:cursor-pointer disabled:cursor-not-allowed my-2 hover:bg-[#222] transition-colors duration-100;
 }
