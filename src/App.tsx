@@ -9,6 +9,7 @@ import Navbar from "./components/navbar";
 import UseRefExample from "./components/hooks/useRef";
 import { UseTransitionLinks } from "./components/react19-concepts/useTransitionLinks";
 import { UseTransitionForm } from "./components/react19-concepts/useTransitionForm";
+import { UseActionState } from "./components/react19-concepts/useActionState";
 
 const App: React.FC = () => {
   return (
@@ -28,6 +29,7 @@ const App: React.FC = () => {
           />
           <Route path="/hooks/useContext" element={<UseContextExample />} />
           <Route path="/hooks/useRef" element={<UseRefExample />} />
+          <Route path="/hooks/useActionState" element={<UseActionState />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </div>
