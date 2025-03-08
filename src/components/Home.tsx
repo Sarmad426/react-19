@@ -29,6 +29,9 @@ export default function Home() {
           <Link to="/hooks/useTransition" className="link-styles">
             useTransition
           </Link>
+          <Link to="/hooks/useActionState" className="link-styles">
+            useActionState
+          </Link>
         </div>
       </div>
     </div>
