@@ -54,7 +54,7 @@ export function UseActionState() {
         <button
           type="submit"
           disabled={isPending}
-          className="w-full primary-btn disabled:bg-gray-400"
+          className="bg-black min-w-[130px] h-[45px] px-2 py-1 text-white rounded-md cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400"
         >
           {isPending ? "Logging in..." : "Login"}
         </button>
