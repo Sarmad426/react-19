@@ -1,6 +1,6 @@
 import { useActionState } from "react";
 
-const users = [{ email: "admin@email.com", password: "abc" }];
+const dbUser = { email: "admin@email.com", password: "abc" };
 
 type state = Record<string, boolean | string> | null;
 
@@ -17,14 +17,14 @@ async function loginAction(prevState: state, formData: FormData) {
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  const user = users.find((u) => u.email === email && u.password === password);
+  const user = dbUser.email === email && dbUser.password === password;
 
   if (user) return { success: true, message: "Login successful!" };
 
   return { success: false, message: "Invalid credentials." };
 }
 
-export function Practice() {
+export function UseActionState() {
   const [state, formAction, isPending] = useActionState(loginAction, null);
 
   return (
