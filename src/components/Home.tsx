@@ -32,6 +32,9 @@ export default function Home() {
           <Link to="/hooks/useActionState" className="link-styles">
             useActionState
           </Link>
+          <Link to="/hooks/useOptimistic" className="link-styles">
+            useOptimistic
+          </Link>
         </div>
       </div>
     </div>
