@@ -1,20 +1,30 @@
 import { useActionState } from "react";
 
-async function loginAction(prevState: any, formData: FormData) {
-  console.log(prevState);
-  const email = formData.get("email") as string;
-  const password = formData.get("password") as string;
+const users = [{ email: "admin@email.com", password: "abc" }];
+
+type state = Record<string, boolean | string> | null;
+
+async function loginAction(prevState: state, formData: FormData) {
+  "use server";
+
+  console.log("Previous State: ", prevState);
+  const email = formData.get("email")?.toString() || "";
+  const password = formData.get("password")?.toString() || "";
+
+  if (!email || !password) {
+    return { success: false, message: "Email and password are required." };
+  }
 
   await new Promise((resolve) => setTimeout(resolve, 1000));
 
-  if (email === "admin@example.com" && password === "password123") {
-    return { success: true, message: "Login successful!" };
-  } else {
-    return { success: false, message: "Invalid credentials." };
-  }
+  const user = users.find((u) => u.email === email && u.password === password);
+
+  if (user) return { success: true, message: "Login successful!" };
+
+  return { success: false, message: "Invalid credentials." };
 }
 
-export function UseActionState() {
+export function Practice() {
   const [state, formAction, isPending] = useActionState(loginAction, null);
 
   return (
@@ -33,7 +43,7 @@ export function UseActionState() {
             name="email"
             id="email"
             required
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <div>
@@ -48,15 +58,15 @@ export function UseActionState() {
             name="password"
             id="password"
             required
-            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-orange-500"
+            className="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
         </div>
         <button
           type="submit"
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-black transition disabled:bg-gray-400"
           disabled={isPending}
-          className="bg-black min-w-[130px] h-[45px] px-2 py-1 text-white rounded-md cursor-pointer disabled:cursor-not-allowed disabled:bg-gray-400"
         >
-          {isPending ? "Logging in..." : "Login"}
+          Login
         </button>
       </form>
       {state && (
