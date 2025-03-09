@@ -35,6 +35,9 @@ export default function Home() {
           <Link to="/hooks/useOptimistic" className="link-styles">
             useOptimistic
           </Link>
+          <Link to="/hooks/useFormStatus" className="link-styles">
+            useFormStatus
+          </Link>
         </div>
       </div>
     </div>
