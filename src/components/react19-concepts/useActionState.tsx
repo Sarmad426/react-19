@@ -63,7 +63,7 @@ export function UseActionState() {
         </div>
         <button
           type="submit"
-          className="w-full bg-black text-white py-2 rounded-md hover:bg-black transition disabled:bg-gray-400"
+          className="w-full bg-black text-white py-2 rounded-md hover:bg-black transition disabled:bg-gray-400 disabled:cursor-not-allowed"
           disabled={isPending}
         >
           Login
