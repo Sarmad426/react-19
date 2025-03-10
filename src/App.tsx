@@ -13,6 +13,7 @@ import { UseActionState } from "./components/react19-concepts/useActionState";
 import { Practice } from "./components/practice/practice";
 import { UseOptimisticHook } from "./components/react19-concepts/useOptimistic";
 import { UseFormStatusHook } from "./components/react19-concepts/useFormStatus";
+import { UseAPI } from "./components/react19-concepts/use";
 
 const App: React.FC = () => {
   return (
@@ -36,6 +37,7 @@ const App: React.FC = () => {
           <Route path="/hooks/useOptimistic" element={<UseOptimisticHook />} />
           <Route path="/hooks/useOptimistic" element={<UseOptimisticHook />} />
           <Route path="/hooks/useFormStatus" element={<UseFormStatusHook />} />
+          <Route path="/API/use" element={<UseAPI />} />
           <Route path="/practice" element={<Practice />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
