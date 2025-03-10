@@ -38,6 +38,9 @@ export default function Home() {
           <Link to="/hooks/useFormStatus" className="link-styles">
             useFormStatus
           </Link>
+          <Link to="/API/use" className="link-styles">
+            use() API
+          </Link>
         </div>
       </div>
     </div>
