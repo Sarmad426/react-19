@@ -4,7 +4,7 @@ interface SearchBarProps {
   onSearch: (query: string) => void;
 }
 
-export default function SearchBar({ onSearch }: SearchBarProps) {
+export function SearchBar({ onSearch }: SearchBarProps) {
   const [query, setQuery] = useState("");
   const deferredQuery = useDeferredValue(query);
   const [isPending, startTransition] = useTransition();

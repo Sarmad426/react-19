@@ -1,9 +1,9 @@
 import { useState, useMemo } from "react";
 import { useGitHubUsers } from "../../custom-hooks/fetch-github-users";
-import SearchBar from "./search-bar";
-import UserCard from "./user-card";
+import { SearchBar } from "./search-bar";
+import { UserCard } from "./user-card";
 
-export default function SearchProject() {
+export function SearchProject() {
   const { data: users, isLoading, error } = useGitHubUsers();
   const [searchQuery, setSearchQuery] = useState("");
 

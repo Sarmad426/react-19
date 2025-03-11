@@ -1,6 +1,6 @@
 import { GitHubUser } from "../../custom-hooks/fetch-github-users";
 
-export default function UserCard({ user }: { user: GitHubUser }) {
+export function UserCard({ user }: { user: GitHubUser }) {
   return (
     <div className="flex items-center p-4 bg-white shadow-lg rounded-xl space-x-4">
       <img

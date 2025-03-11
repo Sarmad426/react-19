@@ -14,7 +14,7 @@ import { Practice } from "./components/practice/practice";
 import { UseOptimisticHook } from "./components/react19-concepts/useOptimistic";
 import { UseFormStatusHook } from "./components/react19-concepts/useFormStatus";
 import { UseAPI } from "./components/react19-concepts/use";
-import SearchProject from "./components/search-input-project/project-main";
+import { SearchProject } from "./components/search-input-project/project-main";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 const queryClient = new QueryClient();
