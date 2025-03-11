@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./components/Home";
+import { Home } from "./components/Home";
 import { UseTransitionTabs } from "./components/react19-concepts/UseTransitionTabs";
-import UseContextExample from "./components/hooks/useContext";
-import NotFound from "./components/404/NotFound";
-import Navbar from "./components/navbar";
-import UseRefExample from "./components/hooks/useRef";
+import { UseContextExample } from "./components/hooks/useContext";
+import { NotFound } from "./components/404/NotFound";
+import { Navbar } from "./components/navbar";
+import { UseRefExamples } from "./components/hooks/useRef";
 import { UseTransitionLinks } from "./components/react19-concepts/useTransitionLinks";
 import { UseTransitionForm } from "./components/react19-concepts/useTransitionForm";
 import { UseActionState } from "./components/react19-concepts/useActionState";
@@ -40,7 +40,7 @@ const App: React.FC = () => {
               element={<UseTransitionForm />}
             />
             <Route path="/hooks/useContext" element={<UseContextExample />} />
-            <Route path="/hooks/useRef" element={<UseRefExample />} />
+            <Route path="/hooks/useRef" element={<UseRefExamples />} />
             <Route path="/hooks/useActionState" element={<UseActionState />} />
             <Route
               path="/hooks/useOptimistic"

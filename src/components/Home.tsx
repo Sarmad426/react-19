@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export default function Home() {
+export function Home() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="my-5">

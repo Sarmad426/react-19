@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-const UseRefExamples = () => {
+export const UseRefExamples = () => {
   // Example 1: DOM element reference
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -157,5 +157,3 @@ const UseRefExamples = () => {
     </div>
   );
 };
-
-export default UseRefExamples;

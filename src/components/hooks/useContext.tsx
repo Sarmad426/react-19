@@ -97,7 +97,7 @@ const Controls: React.FC = () => {
 };
 
 // Main component that demonstrates useContext
-const UseContextExample: React.FC = () => {
+export const UseContextExample: React.FC = () => {
   return (
     <div className="max-w-2xl mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-4">
@@ -130,5 +130,3 @@ const UseContextExample: React.FC = () => {
     </div>
   );
 };
-
-export default UseContextExample;
