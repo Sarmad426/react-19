@@ -12,6 +12,9 @@ export function Home() {
           <Link to="/hooks/useRef" className="link-styles">
             useRef
           </Link>
+          <Link to="/hooks/useTransition" className="link-styles">
+            useTransition
+          </Link>
         </div>
       </div>
       <div className="my-8">
@@ -26,9 +29,7 @@ export function Home() {
           >
             View Docs
           </Link>
-          <Link to="/hooks/useTransition" className="link-styles">
-            useTransition
-          </Link>
+
           <Link to="/hooks/useActionState" className="link-styles">
             useActionState
           </Link>
