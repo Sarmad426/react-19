@@ -16,6 +16,7 @@ import { UseFormStatusHook } from "./components/react19-concepts/useFormStatus";
 import { UseAPI } from "./components/react19-concepts/use";
 import { SearchProject } from "./components/search-input-project/project-main";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AddressForm } from "./components/form-validation/react-19-form";
 
 const queryClient = new QueryClient();
 
@@ -60,6 +61,7 @@ const App: React.FC = () => {
               path="/projects/search-input-project"
               element={<SearchProject />}
             />
+            <Route path="/projects/form-validation" element={<AddressForm />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </div>
