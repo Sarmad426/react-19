@@ -16,6 +16,8 @@ export async function submitAddress(prevState: ActionResponse | null, formData: 
   // Simulate network delay
   await new Promise((resolve) => setTimeout(resolve, 1000))
 
+  console.log(prevState)
+
   try {
     const rawData: AddressFormData = {
       streetAddress: formData.get('streetAddress') as string,

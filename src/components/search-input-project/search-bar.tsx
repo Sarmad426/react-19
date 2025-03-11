@@ -9,6 +9,8 @@ export function SearchBar({ onSearch }: SearchBarProps) {
   const deferredQuery = useDeferredValue(query);
   const [isPending, startTransition] = useTransition();
 
+  console.log(deferredQuery, isPending);
+
   const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
     setQuery(e.target.value);
     startTransition(() => {
