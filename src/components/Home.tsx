@@ -43,6 +43,14 @@ export default function Home() {
           </Link>
         </div>
       </div>
+      <div className="my-8">
+        <h3 className="text-3xl md:text-4xl font-semibold mb-5">Projects</h3>
+        <div className="flex gap-6 flex-wrap">
+          <Link to="/projects/search-input-project" className="link-styles">
+            Search Input Project
+          </Link>
+        </div>
+      </div>
     </div>
   );
 }
