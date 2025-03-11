@@ -50,6 +50,9 @@ export function Home() {
           <Link to="/projects/search-input-project" className="link-styles">
             Search Input Project
           </Link>
+          <Link to="/projects/form-validation" className="link-styles">
+            React 19 Form validation with zod
+          </Link>
         </div>
       </div>
     </div>
