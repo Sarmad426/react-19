@@ -10,7 +10,6 @@ import { UseRefExamples } from "./components/hooks/useRef";
 import { UseTransitionLinks } from "./components/react19-concepts/useTransitionLinks";
 import { UseTransitionForm } from "./components/react19-concepts/useTransitionForm";
 import { UseActionState } from "./components/react19-concepts/useActionState";
-import { Practice } from "./components/practice/practice";
 import { UseOptimisticHook } from "./components/react19-concepts/useOptimistic";
 import { UseFormStatusHook } from "./components/react19-concepts/useFormStatus";
 import { UseAPI } from "./components/react19-concepts/use";
@@ -56,7 +55,6 @@ const App: React.FC = () => {
               element={<UseFormStatusHook />}
             />
             <Route path="/API/use" element={<UseAPI />} />
-            <Route path="/practice" element={<Practice />} />
             <Route
               path="/projects/search-input-project"
               element={<SearchProject />}
