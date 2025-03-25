@@ -21,6 +21,7 @@ This repository demonstrates React 19's new features and modern development prac
 1. **Modern Hook Patterns**
    - React 19 hooks implementation
    - TypeScript type safety
+   - Custom hook creation
 
 2. **Performance Optimization**
    - Proper hooks usage
@@ -39,3 +40,19 @@ This repository demonstrates React 19's new features and modern development prac
 - Component organization
 - Hook composition patterns
 - Performance monitoring
+
+**React Hooks implemented:**
+
+- `useContext` - For global state management
+- `useReducer` - For local state management (todo)
+- `useRef` - For DOM manipulation
+- `useTransition` - For loading state management
+- `use` - For data fetching and promise handling
+- `useOptimistic` - For optimistic UI updates
+- `useFormStatus` - For form submission state tracking
+- `useActionState` - For form state management
+
+**Small projects to demonstrate hooks in practice:**
+
+- Search input project
+- Form validation with zod
