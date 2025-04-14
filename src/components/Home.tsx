@@ -12,6 +12,9 @@ export function Home() {
           <Link to="/hooks/useRef" className="link-styles">
             useRef
           </Link>
+          <Link to="/hooks/useReducer" className="link-styles">
+            useReducer
+          </Link>
           <Link to="/hooks/useTransition" className="link-styles">
             useTransition
           </Link>
