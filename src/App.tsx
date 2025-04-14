@@ -16,6 +16,7 @@ import { UseAPI } from "./components/react19-concepts/use";
 import { SearchProject } from "./components/search-input-project/project-main";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AddressForm } from "./components/form-validation/react-19-form";
+import UseReducerExample from "./components/hooks/useReducer";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +36,7 @@ const App: React.FC = () => {
               path="/hooks/useTransition/tabs"
               element={<UseTransitionTabs />}
             />
+            <Route path="/hooks/useReducer" element={<UseReducerExample />} />
             <Route
               path="/hooks/useTransition/form"
               element={<UseTransitionForm />}
